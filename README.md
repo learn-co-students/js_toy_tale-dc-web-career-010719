@@ -30,7 +30,7 @@ Each card should have the following child elements:
 
 After all if that - the toy card should resemble:
 
-  ```
+  ```html
   <div class="card">
     <h2>Woody</h2>
     <img src=toy_image_url class="toy-avatar" />
@@ -45,15 +45,15 @@ After all if that - the toy card should resemble:
 * The toy should conditionally render to the page.
 * In order to send a POST request via Fetch, give the Fetch a second argument of an object. This object should specify the method as `POST` and also provide the appropriate headers and the JSONified data for the request. If your request isn't working, make sure your header and keys match the documentation.
 
-```
-POST http://localhost:3000/toys
-headers: 
+```json
+// POST http://localhost:3000/toys
+// headers: 
 {
   "Content-Type": "application/json",
-  Accept: "application/json"
+  "Accept": "application/json"
 }
 
-body:
+// body:
 {
   "name": "Jessie",
   "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
@@ -70,15 +70,15 @@ When a user clicks on a toy's like button, two things should happen:
   * Send a patch request to the server at http://localhost:3000/toys/:id updating the number of likes that the specific toy has
   * Headers and body are provided below. If your request isn't working, make sure your header and keys match the documentation.
   
-```
-PATCH http://localhost:3000/toys/:id
-headers: 
+```json
+// PATCH http://localhost:3000/toys/:id
+// headers: 
 {
   "Content-Type": "application/json",
-  Accept: "application/json"
+  "Accept": "application/json"
 }
 
-body:
+// body:
 {
   "likes": <new number>
 }
