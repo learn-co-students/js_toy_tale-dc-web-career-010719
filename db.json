@@ -51,7 +51,7 @@
     {
       "name": "Test",
       "image": "http://umich.edu/~chemh215/W11HTML/SSG5/ssg5.2/FRex.png",
-      "likes": 3,
+      "likes": null,
       "id": 9
     },
     {
@@ -75,7 +75,7 @@
     {
       "name": "New Toy",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 2,
+      "likes": 9,
       "id": 13
     },
     {

@@ -100,12 +100,7 @@ function likeToy() {
     },
     body: JSON.stringify({likes: newLikes})
   })
-  .then(resp => resp.json())
-  .then(json => () => {
-    debugger
-    console.log('hi')
-    card.children[2].innerText = `<p>${newLikes} Likes</p>`
-  })
+  card.children[2].innerText = `${newLikes} Likes`
 }
 
 
