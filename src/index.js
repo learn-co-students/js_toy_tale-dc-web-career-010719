@@ -8,82 +8,66 @@ let addToy = false
 // YOUR CODE HERE
  function init() {
    getToys()
+   const form = document.querySelector("form")
+   form.addEventListener("submit", (e) => {
+     e.preventDefault()
+     postToy(form)
+   })
  }
 
-addBtn.addEventListener('click', () => {
-  // hide & seek with the form
-  addToy = !addToy
-  if (addToy) {
-    toyForm.style.display = 'block'
-    // submit listener here
-  } else {
-    toyForm.style.display = 'none'
-  }
-})
-
-
+  addBtn.addEventListener('click', () => {
+    // hide & seek with the form
+    addToy = !addToy
+    if (addToy) {
+      toyForm.style.display = 'block'
+      // submit listener here
+    } else {
+      toyForm.style.display = 'none'
+    }
+  }) 
 
 // OR HERE!
 
 function getToys() {
   fetch('http://localhost:3000/toys')
     .then(res => res.json())
-    .then(json => renderToys(json))
-}
-
-function renderToys(json) {
-  json.forEach((el) => {
-    displayToy(el)
-  })
-  
-  
-    
-  
+    .then(toys => toys.forEach(displayToy))
 }
 
 function displayToy(toy) {
-//    if (!toy.likes) {
-//      toy.likes = 0
-//    } 
-  let toyCollection = document.querySelector("#toy-collection")
+//create elements
+  const toyCollection = document.querySelector("#toy-collection")
+  const newDiv = document.createElement("div")
+  const h2 = document.createElement("h2")
+  const img = document.createElement("img")
+  const p = document.createElement("p")
+  const button = document.createElement("button")
 
-  let newDiv = document.createElement("div")
+//set attributes
   newDiv.className = "card"
-  toyCollection.appendChild(newDiv)
-
-  let h2 = document.createElement("h2")
-  let img = document.createElement("img")
-  let p = document.createElement("p")
-  let button = document.createElement("button")
-//  let renderedLikes = toy.likes
-  button.className = "like-btn"
-
   h2.innerText = toy.name
   img.src = toy.image
   img.className = "toy-avatar"
-  p.dataset.toyLikes = parseInt(toy.likes)
-  newDiv.dataset.toyId = toy.id
-//  p.innerHTML = p.dataset.toyLikes
+  p.innerHTML = `${toy.likes} Likes`
+  button.className = "like-btn"
   button.innerText = "Like <3"
-  button.addEventListener("click", updateLikes)
-  setLikes(p)
+  
+//set event listeners
+  button.addEventListener("click", () => {updateLikes(toy, button)})
 
+//append elements
   newDiv.appendChild(h2)
   newDiv.appendChild(img)
   newDiv.appendChild(p)
   newDiv.appendChild(button)
-
+  toyCollection.appendChild(newDiv)
 }
 
-function getInput() {
-  let toyName = document.querySelectorAll("input")[0].value
-  let toyImg = document.querySelectorAll("input")[1].value
-
-  return {name: toyName, image: toyImg, likes: 0 }
-}
-
-function postToy(e) {
-  e.preventDefault()
+function postToy(form) {
+//collect input data from form
+  const data = {name: form.name.value, image: form.image.value, likes: 0 }
+  
+//post input information to the database
   fetch("http://localhost:3000/toys", {
     method: "POST",
     headers: 
@@ -91,42 +75,34 @@ function postToy(e) {
       "Content-Type": "application/json",
       Accept: "application/json"
     },
-    body: 
-    JSON.stringify(getInput())
+    body: JSON.stringify(data)
   })
-.then(res => res.json())
-.then(json => displayToy(json))
-//  debugger
+  .then(res => res.json())
+  .then(toy => displayToy(toy)) //render new toy to DOM
+  .then(form.reset()) //reset form
 }
 
-document.querySelectorAll("input")[2].addEventListener("click", postToy)
-
-function setLikes(p) {
-  p.innerText = `Likes : ${p.dataset.toyLikes}`
+function updateLikes(toy, btn) {
+  //set likes and update DOM innerText
+  toy.likes += 1
+  btn.previousSibling.innerText = `Likes : ${toy.likes}`
+  
+  //create data for db patch
+  const data = {likes: toy.likes}
+  
+  //send toy ID and data for fetch patch
+  patchLikes(toy.id, data)
 }
 
-function updateLikes(e) {
-  let p = e.path[1].children[2]
-  let t = e.path[1].dataset.toyId
-  let likes = p.dataset.toyLikes
-  let parsedLikes = parseInt(likes) + 1
-  p.dataset.toyLikes = parsedLikes
-
- 
-  setLikes(p)
-  patchLikes(t, parsedLikes)
-}
-
-function patchLikes(toy, p) {
-  let update = {likes: p}
-  fetch(`http://localhost:3000/toys/${toy}`, {
+function patchLikes(id, data) {
+  fetch(`http://localhost:3000/toys/${id}`, {
 	method: "PATCH",
 	headers: 
 	{
  	 "Content-Type": "application/json",
  	 Accept: "application/json"
 	},
-	body: JSON.stringify(update)
+	body: JSON.stringify(data)
   })
 	.then(res => res.json())
 	.then(json => console.log(json))

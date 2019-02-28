@@ -4,19 +4,19 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 28
+      "likes": 52
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 13
+      "likes": 23
     },
     {
       "id": 3,
       "name": "Mr. Potato Head",
       "image": "https://vignette.wikia.nocookie.net/universe-of-smash-bros-lawl/images/d/d8/Mr-potato-head-toy-story.gif/revision/latest?cb=20151129131217",
-      "likes": 3
+      "likes": 5
     },
     {
       "id": 4,
@@ -101,6 +101,36 @@
       "likes": 6,
       "name": "Snickers",
       "id": 17
+    },
+    {
+      "name": "Plushy",
+      "image": "https://images-na.ssl-images-amazon.com/images/G/01/img16/toys/content-grid/character-tile/1014587_us_toys_favorite_characters_q4__shop-by-tile_416x560_pokemon.jpg",
+      "likes": 17,
+      "id": 19
+    },
+    {
+      "name": "Harvey",
+      "image": "https://www.gannett-cdn.com/presto/2018/09/17/USAT/7355cef5-ddbc-464b-98e9-d4d3e58f400e-CH_4_Elmo.jpg?width=520&height=390&fit=bounds&auto=webp",
+      "likes": 13,
+      "id": 20
+    },
+    {
+      "name": "Phil Dwayne Hartley",
+      "image": "https://www.gannett-cdn.com/presto/2018/09/17/USAT/7355cef5-ddbc-464b-98e9-d4d3e58f400e-CH_4_Elmo.jpg?width=520&height=390&fit=bounds&auto=webp",
+      "likes": 0,
+      "id": 21
+    },
+    {
+      "name": "",
+      "image": "",
+      "likes": 0,
+      "id": 22
+    },
+    {
+      "name": "Snickers",
+      "image": "",
+      "likes": 13,
+      "id": 23
     }
   ]
 }
