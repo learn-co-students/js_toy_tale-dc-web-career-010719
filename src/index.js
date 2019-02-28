@@ -1,7 +1,4 @@
-document.addEventListener("DOMContentLoaded", init()
-                         
-                         
-                         )
+document.addEventListener("DOMContentLoaded", init())
 
 
 const addBtn = document.querySelector('#new-toy-btn')
