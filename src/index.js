@@ -31,23 +31,42 @@ function fetchAllToys(){
 }
 
 function renderToy(toy){
-  makeToyCard()
+  let toyCard = document.createElement('div')
+  toyCard.classList.add("card")
+
+  let toyNameH1 = document.createElement('h1')
+  toyNameH1.innerHTML = toy.name
+  toyCard.id = toy.id
+
+  let toyImageElement = document.createElement('img')
+  toyImageElement.src = toy.image
+  toyImageElement.classList.add("toy-avatar")
+
+  let toyLikeButton = document.createElement('button')
+  toyLikeButton.classList.add('like-btn')
+
+  toyLikeButton.innerText = "Like <3"
+
+  toyLikeButton.addEventListener("click", (e) => likeToy(e, toy))
+
+  let toyLikesP = document.createElement('p')
+  toyLikesP.innerHTML = `${toy.likes} Likes`
+
+
+  toyCard.appendChild(toyNameH1)
+  toyCard.appendChild(toyImageElement)
+  toyCard.appendChild(toyLikesP)
+  toyCard.appendChild(toyLikeButton)
   toyCollection.appendChild(toyCard)
-toyCard.id = toy.id
-toyNameH1.innerHTML = toy.name
-toyImageElement.src = toy.image
-toyLikeButton.dataset.likes = toy.likes
-toyLikesP.innerHTML = `${toyLikeButton.dataset.likes} Likes`
-toyLikeButton.innerText = "Like <3"
-toyLikeButton.addEventListener("click", likeToy)
 }
 
-function likeToy(e){
-  previousLikes = parseInt(e.target.previousElementSibling.innerHTML)
-  previousLikes++
-  e.target.previousElementSibling.innerHTML = `${previousLikes} Likes`
-  sendData = {"likes": ++e.target.dataset.likes}
-  fetch(`http://localhost:3000/toys/${e.target.parentElement.id}`,{
+function likeToy(e, toy){
+  let toyLikes = ++toy.likes
+  displayedLikes = e.target.parentElement.children[2].innerText.split(" ")[0]
+  ++displayedLikes
+  e.target.parentElement.children[2].innerText = `${displayedLikes} Likes`
+  sendData = {"likes": toyLikes}
+  fetch(`http://localhost:3000/toys/${toy.id}`,{
   method: "PATCH",
   headers:
     {
@@ -60,21 +79,6 @@ function likeToy(e){
 
 }
 
-function makeToyCard(){
- toyCard = document.createElement('div')
-    toyCard.classList.add("card")
-  toyNameH1 = document.createElement('h1')
-   toyImageElement = document.createElement('img')
-   toyImageElement.classList.add("toy-avatar")
-   toyLikesP = document.createElement('p')
-   toyLikeButton = document.createElement('button')
-    toyLikeButton.classList.add('like-btn')
-
-  toyCard.appendChild(toyNameH1)
-  toyCard.appendChild(toyImageElement)
-  toyCard.appendChild(toyLikesP)
-  toyCard.appendChild(toyLikeButton)
-}
 
 function createToy(e){
 
@@ -90,5 +94,6 @@ fetch('http://localhost:3000/toys', {
       Accept: "application/json"
     },
     body: JSON.stringify(toyInfo)
-  }).then(res => fetchAllToys())
+  }).then(res => res.json())
+  .then(json => renderToy(json))
 }

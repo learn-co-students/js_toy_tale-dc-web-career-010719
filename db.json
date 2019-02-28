@@ -4,13 +4,13 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 28
+      "likes": 80
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": "16"
+      "likes": 37
     },
     {
       "id": 3,
@@ -22,7 +22,7 @@
       "id": 4,
       "name": "Slinky Dog",
       "image": "https://www.freeiconspng.com/uploads/slinky-png-transparent-1.png",
-      "likes": 7
+      "likes": 8
     },
     {
       "id": 5,
@@ -51,8 +51,26 @@
     {
       "name": "James",
       "image": "http://www.tompetty.com/sites/g/files/g2000007521/f/sample001.jpg",
-      "likes": 0,
+      "likes": 36,
       "id": 9
+    },
+    {
+      "name": "Gryffin",
+      "image": "http://www.tompetty.com/sites/g/files/g2000007521/f/sample001.jpg",
+      "likes": 8,
+      "id": 10
+    },
+    {
+      "name": "dfs",
+      "image": "",
+      "likes": 3,
+      "id": 11
+    },
+    {
+      "name": "dsfsf",
+      "image": "dfsfdf",
+      "likes": 1,
+      "id": 12
     }
   ]
 }
