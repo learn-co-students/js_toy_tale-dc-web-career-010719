@@ -18,29 +18,37 @@ addBtn.addEventListener('click', () => {
 
 // OR HERE!
 
-let toysContainer
-let form
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener("DOMContentLoaded", init)
 
 function init() {
-  toysContainer = document.querySelector('#toy-collection')
   getAllToys()
-  form = document.querySelector('.add-toy-form')
-  form.addEventListener('submit', handleSubmitForm)
+
+  let addToyForm = getAddToyForm()
+  addToyForm.addEventListener('submit', handleClickOfCreateNewToy)
+}
+
+function getToyContainer() {
+  return document.querySelector('#toy-collection')
+}
+
+function getAddToyForm() {
+  return document.querySelector('.add-toy-form')
 }
 
 function getAllToys() {
   fetch('http://localhost:3000/toys')
   .then(res => res.json())
-  .then(allToys => {
-    allToys.forEach(renderToy)
+  .then(allToyObjs => {
+    allToyObjs.forEach(renderToy)
   })
 }
 
 function renderToy(toyObj) {
+  let toyContainer = getToyContainer()
+
   let div = document.createElement('div')
   div.classList.add('card')
-  toysContainer.appendChild(div)
+  toyContainer.appendChild(div)
 
   let h2 = document.createElement('h2')
   div.appendChild(h2)
@@ -53,51 +61,53 @@ function renderToy(toyObj) {
 
   let p = document.createElement('p')
   div.appendChild(p)
-  p.id = 'toy-like-' + toyObj.id
+  p.id = 'toy-' + toyObj.id
   p.innerText = `${toyObj.likes} Likes`
 
   let button = document.createElement('button')
-  button.dataset.id = toyObj.id
   div.appendChild(button)
   button.classList.add('like-btn')
-  button.innerText = 'Like <3'
+  button.dataset.id = toyObj.id
+  button.innerText = "Like"
   button.addEventListener('click', handleClickOfLikeButton)
 }
 
-function handleSubmitForm(event) {
+function handleClickOfCreateNewToy(event) {
   event.preventDefault()
   postNewToy()
 }
 
 function postNewToy() {
   let postData = {
-    name: document.querySelectorAll('.input-text')[0].value,
-    image: document.querySelectorAll('.input-text')[1].value,
+    name: document.querySelectorAll('input')[0].value,
+    image: document.querySelectorAll('input')[1].value,
     likes: 0
   }
-  fetch('http://localhost:3000/toys', {
+
+  document.querySelectorAll('input')[0].value = ''
+  document.querySelectorAll('input')[1].value = ''
+
+  fetch(`http://localhost:3000/toys`, {
     method: "POST",
     body: JSON.stringify(postData),
-    headers: {
+    headers : {
       "Content-Type": "application/json",
       "Accept": "application/json"
     }
   }).then(res => res.json())
-    .then(newToyObj => renderToy(newToyObj))
+    .then(newToyObj => {renderToy(newToyObj)})
 }
 
 function handleClickOfLikeButton(event) {
-  let toyIdToIncreaseLikes = event.currentTarget.dataset.id
-  addLikesToToy(toyIdToIncreaseLikes)
+  let toyId = event.currentTarget.dataset.id
+  patchLikes(toyId)
 }
 
-function addLikesToToy(id) {
-  let currentLikes = parseInt(document.querySelector(`#toy-like-${id}`).innerText.split(' ')[0])
-  let newLikes = currentLikes + 1
+function patchLikes(toyId) {
   let patchData = {
-    likes: newLikes
+    likes: parseInt(document.querySelector(`#toy-${toyId}`).innerText.split(" ")[0]) + 1
   }
-  fetch(`http://localhost:3000/toys/${id}`, {
+  fetch(`http://localhost:3000/toys/${toyId}`, {
     method: "PATCH",
     body: JSON.stringify(patchData),
     headers: {
@@ -105,9 +115,7 @@ function addLikesToToy(id) {
       "Accept": "application/json"
     }
   }).then(res => res.json())
-    .then(patchedToy => adjustLikes(patchedToy))
-}
-
-function adjustLikes(patchedToy) {
-  document.querySelector(`#toy-like-${patchedToy.id}`).innerText = `${patchedToy.likes} Likes`
+    .then(patchedToyObj => {
+      document.querySelector(`#toy-${toyId}`).innerText = `${patchedToyObj.likes} Likes`
+    })
 }
