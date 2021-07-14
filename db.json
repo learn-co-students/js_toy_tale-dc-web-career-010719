@@ -4,19 +4,19 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 11
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 8
+      "likes": 24
     },
     {
       "id": 3,
       "name": "Mr. Potato Head",
       "image": "https://vignette.wikia.nocookie.net/universe-of-smash-bros-lawl/images/d/d8/Mr-potato-head-toy-story.gif/revision/latest?cb=20151129131217",
-      "likes": 3
+      "likes": 12
     },
     {
       "id": 4,
@@ -47,6 +47,48 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "BabyFace",
+      "image": "https://i.pinimg.com/originals/32/ec/5d/32ec5dc3a66d195e455a4db28db8f46e.jpg",
+      "likes": -40,
+      "id": 9
+    },
+    {
+      "name": "BabyFace",
+      "image": "https://i.pinimg.com/originals/32/ec/5d/32ec5dc3a66d195e455a4db28db8f46e.jpg",
+      "likes": -100,
+      "id": 10
+    },
+    {
+      "name": "BabyFace",
+      "image": "https://i.pinimg.com/originals/32/ec/5d/32ec5dc3a66d195e455a4db28db8f46e.jpg",
+      "likes": -100,
+      "id": 11
+    },
+    {
+      "name": "BabyFace",
+      "image": "https://i.pinimg.com/originals/32/ec/5d/32ec5dc3a66d195e455a4db28db8f46e.jpg",
+      "likes": -100,
+      "id": 12
+    },
+    {
+      "name": "BabyFace",
+      "image": "https://i.pinimg.com/originals/32/ec/5d/32ec5dc3a66d195e455a4db28db8f46e.jpg",
+      "likes": -100,
+      "id": 13
+    },
+    {
+      "name": "It me, Lotso",
+      "image": "https://vignette.wikia.nocookie.net/pixar/images/4/43/Lotso_006.jpg/revision/latest/scale-to-width-down/185?cb=20130609012318",
+      "likes": 1,
+      "id": 14
+    },
+    {
+      "name": "Mr Tortilla Head",
+      "image": "https://imgix.elitedaily.com/elite-daily/2016/01/15225944/toystory-.jpg?w=610&fit=max&auto=format&q=70",
+      "likes": 72,
+      "id": 15
     }
   ]
 }
